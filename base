@@ -1,0 +1,36 @@
+#!/bin/bash
+
+mypid=$$
+args=($@)
+runserver=0
+port=4567
+
+for file in `find . ! \( -name bin -prune \) -and ! \( -name publish -prune \) -and ! -name base -and -type f -and ! -name *.swp -and ! -name .DS_Store`
+do
+  if [ -f $file ]
+  then
+    ruby bin/web.watchr.rb -c $file
+  fi
+done
+
+for ((i=0;i<$#;i++))
+do
+  case ${args[i]} in
+    "-s") runserver=1 ;;
+    "-p") port=${args[++i]} ;;
+       *) echo "Invalid argument \"${args[i]}\""
+  esac
+done
+
+if [ "$runserver" -eq "1" ]
+then
+  node bin/server.js $port &
+fi
+
+watchr bin/web.watchr.rb &
+
+trap "kill -TERM -$mypid" SIGINT
+while :
+do
+  sleep 60
+done

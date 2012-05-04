@@ -1,0 +1,39 @@
+@colwidth: 60px;
+@gutwidth: 20px;
+@width: 960px;
+
+.container {
+  clear:both;
+}
+
+.container > :not(.container) {
+  margin: 0 0 0 @width;
+}
+
+.container > :first-child {
+  margin: 0 0 0 0;
+}
+
+.cols (@nbr, @offs:0) {
+  display:inline;
+  float:left;
+  width: @colwidth * @nbr + @gutwidth * (@nbr - 1);
+}
+
+.cols (@nbr, @offs) when (@offs > 0) {
+  margin-right: @colwidth * @offs + @gutwidth * @offs;
+}
+
+.cols (@nbr, @offs) when (@offs < 0) {
+  margin-left: @colwidth * -@offs + @gutwidth * -(@offs - 1);
+}
+
+body {
+  max-width:@width;
+  margin:auto;
+}
+
+body > * {
+  position:relative;
+  left:@gutwidth/2;
+}
