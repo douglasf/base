@@ -14,7 +14,7 @@ require "fileutils"
     :ending => "html"
   },
   "coffee" => {
-    :compiler => "coffee -p",
+    :compiler => "coffee -cs",
     :ending => "js"
   }
 }
@@ -29,7 +29,8 @@ def compile_file file
     FileUtils.touch out
   end
   if File.mtime(file) > File.mtime(out) or new_file
-    result = `#{@settings[ending][:compiler]} #{file} > #{out}`
+    replace = File.read(file).gsub(/\<baseup (.*)\>/) { File.read("modules/#{$1}") }
+    result = `echo \'#{replace}\' | #{@settings[ending][:compiler]} > #{out}`
     puts "WATCHR: Wrote to #{out}" if $?.success? 
   end
 end

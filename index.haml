@@ -2,11 +2,15 @@
 %html
   %head
     %title Base
-    %link(rel="stylesheet" href="css/styles.css")
+    %link{:rel => "stylesheet", :href => "css/styles.css"}
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"}
+    %script{:src => "js/script.js"}
   %body
     #content
       %header
         %h1 Base
+        <baseup para.haml>
       .container
         %nav
         %article
+          %a#next{:href => "#"} Next

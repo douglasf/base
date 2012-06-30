@@ -5,7 +5,7 @@ args=($@)
 runserver=0
 port=4567
 
-for file in `find . \! \( -iname ".git*" -prune \) -and ! \( -iname publish -prune \) -and ! \( -iname bin -prune \) -and ! -iname readme.md -and ! -iname *ds_store -and ! -iname *.swp -and ! -iname base -and -type f`
+for file in `find . \! \( -iname ".git*" -prune \) -and ! \( -iname modules -prune \) -and ! \( -iname publish -prune \) -and ! \( -iname bin -prune \) -and ! -iname readme.md -and ! -iname *ds_store -and ! -iname *.swp -and ! -iname base -and -type f`
 do
   if [ -f $file ]
   then
