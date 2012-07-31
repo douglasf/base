@@ -5,7 +5,6 @@ var port = process.argv[2];
 
 http.createServer(function (request, response) {
  
-    console.log('NODE: Request starting ' + request.url);
     var filePath = 'publish' + request.url;
     if (filePath == 'publish/')
         filePath = 'publish/index.html';

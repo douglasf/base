@@ -15,17 +15,21 @@
 }
 
 .cols (@nbr, @offs:0) {
+  img {
+    max-width: @colwidth * @nbr + @gutwidth * (@nbr - 1);
+    height: auto;
+  }
   display:inline;
   float:left;
   width: @colwidth * @nbr + @gutwidth * (@nbr - 1);
 }
 
 .cols (@nbr, @offs) when (@offs > 0) {
-  margin-right: @colwidth * @offs + @gutwidth * @offs;
+  margin-right: @colwidth * @offs + @gutwidth * @offs !important;
 }
 
 .cols (@nbr, @offs) when (@offs < 0) {
-  margin-left: @colwidth * -@offs + @gutwidth * -(@offs - 1);
+  margin-left: @colwidth * -@offs + @gutwidth * -(@offs - 1) !important;
 }
 
 body {
